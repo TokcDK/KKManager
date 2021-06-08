@@ -24,6 +24,8 @@ namespace KKManager.Functions
         /// </summary>
         public static async Task<bool?> IsUpdateAvailable()
         {
+            return false; //remove update check
+
             try
             {
                 var latestVersion = await CheckLatestVersion();
