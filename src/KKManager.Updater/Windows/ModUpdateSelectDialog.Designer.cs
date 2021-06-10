@@ -94,7 +94,7 @@ namespace KKManager.Updater.Windows
             this.olvColumnName.FillsFreeSpace = true;
             this.olvColumnName.Hideable = false;
             this.olvColumnName.MinimumWidth = 60;
-            this.olvColumnName.Text = "Task name";
+            this.olvColumnName.Text = T._("Task name");
             this.olvColumnName.Width = 332;
             // 
             // olvColumnDate
@@ -102,7 +102,7 @@ namespace KKManager.Updater.Windows
             this.olvColumnDate.AspectName = "ModifiedTime";
             this.olvColumnDate.Hideable = false;
             this.olvColumnDate.MinimumWidth = 60;
-            this.olvColumnDate.Text = "Update date";
+            this.olvColumnDate.Text = T._("Update date");
             this.olvColumnDate.Width = 132;
             // 
             // olvColumnSize
@@ -110,7 +110,7 @@ namespace KKManager.Updater.Windows
             this.olvColumnSize.AspectName = "TotalUpdateSize";
             this.olvColumnSize.Hideable = false;
             this.olvColumnSize.MinimumWidth = 60;
-            this.olvColumnSize.Text = "Update Size";
+            this.olvColumnSize.Text = T._("Update Size");
             this.olvColumnSize.Width = 82;
             // 
             // buttonCancel
@@ -123,7 +123,7 @@ namespace KKManager.Updater.Windows
             this.buttonCancel.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.buttonCancel.Size = new System.Drawing.Size(75, 29);
             this.buttonCancel.TabIndex = 4;
-            this.buttonCancel.Text = "Cancel";
+            this.buttonCancel.Text = T._("Cancel");
             this.buttonCancel.UseVisualStyleBackColor = true;
             // 
             // buttonAccept
@@ -135,7 +135,7 @@ namespace KKManager.Updater.Windows
             this.buttonAccept.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.buttonAccept.Size = new System.Drawing.Size(133, 29);
             this.buttonAccept.TabIndex = 3;
-            this.buttonAccept.Text = "Update selected mods";
+            this.buttonAccept.Text = T._("Update selected mods");
             this.buttonAccept.UseVisualStyleBackColor = true;
             this.buttonAccept.Click += new System.EventHandler(this.buttonAccept_Click);
             // 
@@ -172,7 +172,7 @@ namespace KKManager.Updater.Windows
             this.buttonNone.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.buttonNone.Size = new System.Drawing.Size(84, 29);
             this.buttonNone.TabIndex = 1;
-            this.buttonNone.Text = "Select none";
+            this.buttonNone.Text = T._("Select none");
             this.buttonNone.UseVisualStyleBackColor = true;
             this.buttonNone.Click += new System.EventHandler(this.SelectNone);
             // 
@@ -185,7 +185,7 @@ namespace KKManager.Updater.Windows
             this.buttonAll.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.buttonAll.Size = new System.Drawing.Size(70, 29);
             this.buttonAll.TabIndex = 0;
-            this.buttonAll.Text = "Select all";
+            this.buttonAll.Text = T._("Select all");
             this.buttonAll.UseVisualStyleBackColor = true;
             this.buttonAll.Click += new System.EventHandler(this.SelectAll);
             // 
@@ -245,8 +245,8 @@ namespace KKManager.Updater.Windows
             this.label1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 4);
             this.label1.Size = new System.Drawing.Size(526, 17);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Mods that can be updated. Select which updates to download and install, then clic" +
-    "k the Update button below.";
+            this.label1.Text = T._("Mods that can be updated. Select which updates to download and install, then clic" +
+    "k the Update button below.");
             // 
             // objectListView2
             // 
@@ -278,7 +278,7 @@ namespace KKManager.Updater.Windows
             this.olvColumnFileName.AspectName = "";
             this.olvColumnFileName.FillsFreeSpace = true;
             this.olvColumnFileName.Hideable = false;
-            this.olvColumnFileName.Text = "File name";
+            this.olvColumnFileName.Text = T._("File name");
             this.olvColumnFileName.Width = 333;
             // 
             // olvColumnFileDate
@@ -286,7 +286,7 @@ namespace KKManager.Updater.Windows
             this.olvColumnFileDate.AspectName = "";
             this.olvColumnFileDate.Hideable = false;
             this.olvColumnFileDate.MinimumWidth = 60;
-            this.olvColumnFileDate.Text = "Update date";
+            this.olvColumnFileDate.Text = T._("Update date");
             this.olvColumnFileDate.Width = 119;
             // 
             // olvColumnFileSize
@@ -294,7 +294,7 @@ namespace KKManager.Updater.Windows
             this.olvColumnFileSize.AspectName = "";
             this.olvColumnFileSize.Hideable = false;
             this.olvColumnFileSize.MinimumWidth = 60;
-            this.olvColumnFileSize.Text = "File size";
+            this.olvColumnFileSize.Text = T._("File size");
             this.olvColumnFileSize.Width = 79;
             // 
             // label2
@@ -306,9 +306,9 @@ namespace KKManager.Updater.Windows
             this.label2.Padding = new System.Windows.Forms.Padding(0, 0, 0, 4);
             this.label2.Size = new System.Drawing.Size(480, 30);
             this.label2.TabIndex = 3;
-            this.label2.Text = "Contents of the selected update. All paths are relative to the game\'s root direct" +
+            this.label2.Text = T._("Contents of the selected update. All paths are relative to the game\'s root direct" +
     "ory.\r\nFiles in green are completely new additions. Files in red are no longer ne" +
-    "cessary and will be removed.";
+    "cessary and will be removed.");
             // 
             // ModUpdateSelectDialog
             // 
@@ -321,7 +321,7 @@ namespace KKManager.Updater.Windows
             this.Controls.Add(this.panel1);
             this.Name = "ModUpdateSelectDialog";
             this.ShowIcon = false;
-            this.Text = "Select which mods to update";
+            this.Text = T._("Select which mods to update");
             ((System.ComponentModel.ISupportInitialize)(this.objectListView1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

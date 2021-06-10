@@ -83,9 +83,9 @@
             this.label1.Padding = new System.Windows.Forms.Padding(4, 6, 4, 0);
             this.label1.Size = new System.Drawing.Size(474, 40);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Hold tight while the selected updates are being downloaded and installed by our c" +
+            this.label1.Text = T._("Hold tight while the selected updates are being downloaded and installed by our c" +
     "ertified technician, Chikarin! Please avoid accessing the game files until after" +
-    " the update is finished.";
+    " the update is finished.");
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // checkBoxSleep
@@ -96,7 +96,7 @@
             this.checkBoxSleep.Name = "checkBoxSleep";
             this.checkBoxSleep.Size = new System.Drawing.Size(109, 17);
             this.checkBoxSleep.TabIndex = 3;
-            this.checkBoxSleep.Text = "Sleep when done";
+            this.checkBoxSleep.Text = T._("Sleep when done");
             this.checkBoxSleep.UseVisualStyleBackColor = true;
             // 
             // panel2
@@ -126,7 +126,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 1;
-            this.button1.Text = "Cancel";
+            this.button1.Text = T._("Cancel");
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -167,7 +167,7 @@
             this.olvColumnStatus});
             this.fastObjectListView1.Cursor = System.Windows.Forms.Cursors.Default;
             this.fastObjectListView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fastObjectListView1.EmptyListMsg = "Waiting for files to download...";
+            this.fastObjectListView1.EmptyListMsg = T._("Waiting for files to download...");
             this.fastObjectListView1.FullRowSelect = true;
             this.fastObjectListView1.HideSelection = false;
             this.fastObjectListView1.Location = new System.Drawing.Point(0, 0);
@@ -184,25 +184,25 @@
             // olvColumnName
             // 
             this.olvColumnName.FillsFreeSpace = true;
-            this.olvColumnName.Text = "Name";
+            this.olvColumnName.Text = T._("Name");
             this.olvColumnName.Width = 198;
             // 
             // olvColumnSize
             // 
             this.olvColumnSize.MinimumWidth = 70;
-            this.olvColumnSize.Text = "Size";
+            this.olvColumnSize.Text = T._("Size");
             this.olvColumnSize.Width = 56;
             // 
             // olvColumnProgress
             // 
             this.olvColumnProgress.MinimumWidth = 70;
-            this.olvColumnProgress.Text = "Progress";
+            this.olvColumnProgress.Text = T._("Progress");
             this.olvColumnProgress.Width = 70;
             // 
             // olvColumnStatus
             // 
             this.olvColumnStatus.MinimumWidth = 90;
-            this.olvColumnStatus.Text = "Status";
+            this.olvColumnStatus.Text = T._("Status");
             this.olvColumnStatus.Width = 90;
             // 
             // panel5
@@ -243,7 +243,7 @@
             this.labelStatus.Padding = new System.Windows.Forms.Padding(8, 2, 8, 6);
             this.labelStatus.Size = new System.Drawing.Size(170, 24);
             this.labelStatus.TabIndex = 1;
-            this.labelStatus.Text = "Downloading status msg";
+            this.labelStatus.Text = T._("Downloading status msg");
             this.labelStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // updateTimer
@@ -275,7 +275,7 @@
             this.Name = "ModUpdateProgressDialog";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Mods are being updated";
+            this.Text = T._("Mods are being updated");
             this.Shown += new System.EventHandler(this.ModUpdateProgress_Shown);
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);

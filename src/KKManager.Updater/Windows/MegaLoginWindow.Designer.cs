@@ -76,7 +76,7 @@
             this.buttonAcc.Name = "buttonAcc";
             this.buttonAcc.Size = new System.Drawing.Size(75, 23);
             this.buttonAcc.TabIndex = 2;
-            this.buttonAcc.Text = "Log in";
+            this.buttonAcc.Text = T._("Log in");
             this.buttonAcc.UseVisualStyleBackColor = true;
             this.buttonAcc.Click += new System.EventHandler(this.buttonAcc_Click);
             // 
@@ -87,7 +87,7 @@
             this.buttonAnon.Name = "buttonAnon";
             this.buttonAnon.Size = new System.Drawing.Size(77, 23);
             this.buttonAnon.TabIndex = 2;
-            this.buttonAnon.Text = "Do not log in";
+            this.buttonAnon.Text = T._("Do not log in");
             this.toolTip1.SetToolTip(this.buttonAnon, "Skip logging in and proceed as an anonymous user");
             this.buttonAnon.UseVisualStyleBackColor = true;
             this.buttonAnon.Click += new System.EventHandler(this.buttonAnon_Click);
@@ -100,7 +100,7 @@
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 2;
-            this.buttonCancel.Text = "Cancel";
+            this.buttonCancel.Text = T._("Cancel");
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
@@ -148,7 +148,7 @@
             this.label3.Padding = new System.Windows.Forms.Padding(0, 6, 0, 0);
             this.label3.Size = new System.Drawing.Size(136, 19);
             this.label3.TabIndex = 6;
-            this.label3.Text = "Remember (?)";
+            this.label3.Text = T._("Remember (?)");
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.toolTip1.SetToolTip(this.label3, resources.GetString("label3.ToolTip"));
             // 
@@ -161,7 +161,7 @@
             this.labelPass.Padding = new System.Windows.Forms.Padding(0, 6, 0, 0);
             this.labelPass.Size = new System.Drawing.Size(136, 19);
             this.labelPass.TabIndex = 5;
-            this.labelPass.Text = "Password";
+            this.labelPass.Text = T._("Password");
             this.labelPass.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // labelEmail
@@ -173,7 +173,7 @@
             this.labelEmail.Padding = new System.Windows.Forms.Padding(0, 6, 0, 0);
             this.labelEmail.Size = new System.Drawing.Size(136, 19);
             this.labelEmail.TabIndex = 4;
-            this.labelEmail.Text = "Your Email";
+            this.labelEmail.Text = T._("Your Email");
             this.labelEmail.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.toolTip1.SetToolTip(this.labelEmail, "Your login that you use on mega.nz");
             // 
@@ -231,7 +231,7 @@
             this.Name = "MegaLoginWindow";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Updater - Log in to mega.nz";
+            this.Text = T._("Updater - Log in to mega.nz");
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);

@@ -117,14 +117,14 @@ namespace KKManager.Updater.Windows
 
                 #endregion
 
-                SetStatus("Preparing...");
+                SetStatus(T._("Preparing..."));
                 if (await ProcessWaiter.CheckForProcessesBlockingKoiDir() == false)
                     throw new OperationCanceledException();
 
                 #region Find and select updates
 
-                SetStatus("Searching for mod updates...");
-                labelPercent.Text = "Please wait, this might take a couple of minutes.";
+                SetStatus(T._("Searching for mod updates..."));
+                labelPercent.Text = T._("Please wait, this might take a couple of minutes.");
                 var updateTasks = await UpdateSourceManager.GetUpdates(_cancelToken.Token, _updaters, _autoInstallGuids);
 
                 _cancelToken.Token.ThrowIfCancellationRequested();
@@ -133,7 +133,7 @@ namespace KKManager.Updater.Windows
 
                 if (updateTasks.All(x => x.UpToDate))
                 {
-                    SetStatus("Everything is up to date!");
+                    SetStatus(T._("Everything is up to date!"));
                     progressBar1.Value = progressBar1.Maximum;
                     _cancelToken.Cancel();
                     return;
@@ -142,13 +142,13 @@ namespace KKManager.Updater.Windows
                 var isAutoInstall = _autoInstallGuids != null && _autoInstallGuids.Length > 0;
                 if (!isAutoInstall)
                 {
-                    SetStatus($"Found {updateTasks.Count} updates, waiting for user confirmation.");
+                    SetStatus(T._($"Found {updateTasks.Count} updates, waiting for user confirmation."));
                     updateTasks = ModUpdateSelectDialog.ShowWindow(this, updateTasks);
                 }
                 else
                 {
                     var skipped = updateTasks.RemoveAll(x => x.UpToDate);
-                    SetStatus($"Found {updateTasks.Count} update tasks in silent mode, {skipped} are already up-to-date.", true, true);
+                    SetStatus(T._($"Found {updateTasks.Count} update tasks in silent mode, {skipped} are already up-to-date."), true, true);
                 }
 
                 if (updateTasks == null)
@@ -156,7 +156,7 @@ namespace KKManager.Updater.Windows
 
                 #endregion
 
-                SleepControls.PreventSleepOrShutdown(Handle, "Update is in progress");
+                SleepControls.PreventSleepOrShutdown(Handle, T._("Update is in progress"));
 
                 #region Set up update downloader and start downloading
 
@@ -201,19 +201,19 @@ namespace KKManager.Updater.Windows
                     averageDownloadSpeed.Sample(downloadedSinceLast.GetKbSize());
                     var etaSeconds = (_overallSize - _completedSize).GetKbSize() / (double)averageDownloadSpeed.GetAverage();
                     var eta = double.IsNaN(etaSeconds) || etaSeconds < 0 || etaSeconds > TimeSpan.MaxValue.TotalSeconds 
-                        ? "Unknown" 
+                        ? T._("Unknown") 
                         : TimeSpan.FromSeconds(etaSeconds).GetReadableTimespan();
 
                     labelPercent.Text =
-                        $"Overall: {totalPercent:F1}% done  ({_completedSize} out of {_overallSize})\r\n" +
-                        $"Speed: {downloadedSinceLast}/s  (ETA: {eta})";
+                        T._($"Overall: {totalPercent:F1}% done  ({_completedSize} out of {_overallSize})\r\n") +
+                        T._($"Speed: {downloadedSinceLast}/s  (ETA: {eta})");
                     //$"Speed: {downloadedSinceLast:F1}KB/s";
 
                     progressBar1.Value = Math.Min((int)Math.Round(totalPercent * 10), progressBar1.Maximum);
                 };
                 updateTimer.Start();
 
-                SetStatus("Downloading updates...", true, true);
+                SetStatus(T._("Downloading updates..."), true, true);
 
                 await downloader.RunUpdate(_cancelToken.Token);
 
@@ -226,9 +226,9 @@ namespace KKManager.Updater.Windows
                 var failedItems = downloadItems.Where(x => x.Status == UpdateDownloadStatus.Failed).ToList();
                 var unfinishedCount = downloadItems.Count(x => x.Status != UpdateDownloadStatus.Finished);
 
-                var s = $"Successfully updated/removed {downloadItems.Count - unfinishedCount} files from {updateTasks.Count} tasks.";
+                var s = T._($"Successfully updated/removed {downloadItems.Count - unfinishedCount} files from {updateTasks.Count} tasks.");
                 if (failedItems.Any())
-                    s += $"\nFailed to update {failedItems.Count} files because some sources crashed. Check log for details.";
+                    s += T._($"\nFailed to update {failedItems.Count} files because some sources crashed. Check log for details.");
 
                 SetStatus(s, true, true);
 
@@ -245,7 +245,7 @@ namespace KKManager.Updater.Windows
                         .Select(y => y.Message.Contains("InnerException") && y.InnerException != null ? y.InnerException.Message : y.Message)
                         .Distinct();
 
-                    var failDetails = "Reason(s) for failing:\n" + string.Join("\n", exceptionMessages);
+                    var failDetails = T._("Reason(s) for failing:\n") + string.Join("\n", exceptionMessages);
                     Console.WriteLine(failDetails);
                     s += " " + failDetails;
                 }
@@ -253,18 +253,18 @@ namespace KKManager.Updater.Windows
                 // Sleep before showing a messagebox since the box will block until user clicks ok
                 SleepIfNecessary();
 
-                MessageBox.Show(s, "Finished updating", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(s, T._("Finished updating"), MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 #endregion
             }
             catch (OutdatedVersionException ex)
             {
-                SetStatus("KK Manager needs to be updated to get updates.", true, true);
+                SetStatus(T._("KK Manager needs to be updated to get updates."), true, true);
                 ex.ShowKkmanOutdatedMessage();
             }
             catch (OperationCanceledException)
             {
-                SetStatus("Update was cancelled by the user.", true, true);
+                SetStatus(T._("Update was cancelled by the user."), true, true);
             }
             catch (Exception ex)
             {
@@ -273,39 +273,39 @@ namespace KKManager.Updater.Windows
                 if (!exceptions.Any(x => x is OperationCanceledException))
                     SleepIfNecessary();
 
-                SetStatus("Unexpected crash while updating mods, aborting.", true, true);
+                SetStatus(T._("Unexpected crash while updating mods, aborting."), true, true);
                 SetStatus(string.Join("\n---\n", exceptions), false, true);
-                MessageBox.Show("Something unexpected happened and the update could not be completed. Make sure that your internet connection is stable, " +
-                                "and that you did not hit your download limits, then try again.\n\nError message (check log for more):\n" + string.Join("\n", exceptions.Select(x => x.Message)),
-                                "Update failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(T._("Something unexpected happened and the update could not be completed. Make sure that your internet connection is stable, " +
+                                "and that you did not hit your download limits, then try again.\n\nError message (check log for more):\n") + string.Join("\n", exceptions.Select(x => x.Message)),
+                                T._("Update failed"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
                 updateTimer.Stop();
                 checkBoxSleep.Enabled = false;
 
-                fastObjectListView1.EmptyListMsg = "Nothing was downloaded";
+                fastObjectListView1.EmptyListMsg = T._("Nothing was downloaded");
 
                 _cancelToken.Cancel();
 
                 labelPercent.Text = "";
                 if (_completedSize != FileSize.Empty)
                 {
-                    labelPercent.Text += $"Downloaded {_completedSize} out of {_overallSize}";
+                    labelPercent.Text += T._($"Downloaded {_completedSize} out of {_overallSize}");
                     if (downloadStartTime != DateTime.MinValue)
                     {
                         var timeSpent = DateTime.Now - downloadStartTime;
-                        labelPercent.Text += $" in {timeSpent.GetReadableTimespan()}";
+                        labelPercent.Text += T._($" in {timeSpent.GetReadableTimespan()}");
                     }
                     labelPercent.Text += "\n";
                 }
                 var averageDlSpeed = averageDownloadSpeed.GetAverage();
                 if (averageDlSpeed > 0)
-                    labelPercent.Text += $"Average download speed: {new FileSize(averageDlSpeed)}/s";
+                    labelPercent.Text += T._($"Average download speed: {new FileSize(averageDlSpeed)}/s");
 
                 progressBar1.Style = ProgressBarStyle.Blocks;
                 button1.Enabled = true;
-                button1.Text = "OK";
+                button1.Text = T._("OK");
 
                 if (_autoInstallGuids != null && _autoInstallGuids.Length > 0) Close();
 
@@ -320,7 +320,7 @@ namespace KKManager.Updater.Windows
             if (checkBoxSleep.Checked)
             {
                 if (!SleepControls.PutToSleep())
-                    MessageBox.Show("Sleep when done", "Could not put the PC to sleep for some reason :(",
+                    MessageBox.Show(T._("Sleep when done"), T._("Could not put the PC to sleep for some reason :("),
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 

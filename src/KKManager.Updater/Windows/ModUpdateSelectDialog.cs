@@ -20,24 +20,24 @@ namespace KKManager.Updater.Windows
         {
             InitializeComponent();
 
-            objectListView1.EmptyListMsg = "All mods are up to date!";
+            objectListView1.EmptyListMsg = T._("All mods are up to date!");
             olvColumnDate.AspectToStringConverter = value =>
             {
                 if (value is DateTime dt)
-                    return dt == DateTime.MinValue ? "Unknown" : dt.ToShortDateString();
+                    return dt == DateTime.MinValue ? T._("Unknown") : dt.ToShortDateString();
                 if (value == null)
-                    return "Unknown";
+                    return T._("Unknown");
                 return value.ToString();
             };
 
-            objectListView2.EmptyListMsg = "Select a task to view its details.";
+            objectListView2.EmptyListMsg = T._("Select a task to view its details.");
             objectListView2.FormatRow += ObjectListView2_FormatRow;
             olvColumnFileName.AspectGetter = rowObject => ((UpdateItem)rowObject).TargetPath.FullName.Substring(InstallDirectoryHelper.GameDirectory.FullName.Length);
             olvColumnFileDate.AspectGetter = rowObject =>
             {
                 var date = ((UpdateItem) rowObject).RemoteFile?.ModifiedTime;
                 if (date == null || date == DateTime.MinValue)
-                    return "Will be removed";
+                    return T._("Will be removed");
                 return date.Value.ToShortDateString();
             };
             olvColumnFileSize.AspectGetter = rowObject => ((UpdateItem) rowObject).GetDownloadSize();
@@ -60,7 +60,7 @@ namespace KKManager.Updater.Windows
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Failed to get updates", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.ToString(), T._("Failed to get updates"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             return null;
@@ -123,7 +123,7 @@ namespace KKManager.Updater.Windows
         private void objectListView1_ItemChecked(object sender, ItemCheckedEventArgs e)
         {
             var sumFileSizes = FileSize.SumFileSizes(objectListView1.CheckedObjects.Cast<UpdateTask>().Select(x => x.TotalUpdateSize));
-            labelDownload.Text = (sumFileSizes == FileSize.Empty ? "Nothing" : sumFileSizes.ToString()) + " to download";
+            labelDownload.Text = (sumFileSizes == FileSize.Empty ? T._("Nothing") : sumFileSizes.ToString()) + T._(" to download");
         }
 
         private void objectListView1_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
