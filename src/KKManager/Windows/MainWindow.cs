@@ -1,18 +1,4 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Drawing;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Reactive.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using KKManager.Data.Plugins;
+﻿using KKManager.Data.Plugins;
 using KKManager.Data.Zipmods;
 using KKManager.Functions;
 using KKManager.Properties;
@@ -26,6 +12,20 @@ using KKManager.Windows.ToolWindows;
 using KKManager.Windows.ToolWindows.Properties;
 using Microsoft.Win32;
 using Microsoft.WindowsAPICodePack.Dialogs;
+using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Drawing;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Reactive.Linq;
+using System.Reflection;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace KKManager.Windows
@@ -581,8 +581,8 @@ namespace KKManager.Windows
         private void compressGameFilesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show(
-                    "This will compress all of your game files in order to greatly reduce their size on disk and potentially slightly improve the loading times.\n\nThis process can take a very long time depending on your CPU and drive speeds. If some or all game files are already compressed then the size reduction might be low.",
-                    "Compress files", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+                    T._("This will compress all of your game files in order to greatly reduce their size on disk and potentially slightly improve the loading times.\n\nThis process can take a very long time depending on your CPU and drive speeds. If some or all game files are already compressed then the size reduction might be low."),
+                    T._("Compress files"), MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
             {
                 var rootDirectory = InstallDirectoryHelper.GameDirectory;
                 var directories = rootDirectory.GetDirectories("*", SearchOption.TopDirectoryOnly)
@@ -621,12 +621,12 @@ namespace KKManager.Windows
             if (!SB3UGS_Initializer.CheckIsAvailable())
             {
                 MessageBox.Show(
-                    "SB3UGS has not been found in KK Manager directory or it failed to be loaded. Reinstall KK Manager and try again.",
-                    "Compress files", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    T._("SB3UGS has not been found in KK Manager directory or it failed to be loaded. Reinstall KK Manager and try again."),
+                    T._("Compress files"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            LoadingDialog.ShowDialog(this, "Compressing asset bundle files", dialogInterface =>
+            LoadingDialog.ShowDialog(this, T._("Compressing asset bundle files"), dialogInterface =>
             {
                 dialogInterface.SetMaximum(files.Count);
 
@@ -636,7 +636,7 @@ namespace KKManager.Windows
 
                 Parallel.ForEach(files, file =>
                 {
-                    dialogInterface.SetProgress(count++, "Compressing " + file.Name);
+                    dialogInterface.SetProgress(count++, T._("Compressing ") + file.Name);
 
                     try
                     {
@@ -647,15 +647,15 @@ namespace KKManager.Windows
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine($"Failed to compress file {file.FullName} - {ex.Message}");
+                        Console.WriteLine(T._($"Failed to compress file {file.FullName} - {ex.Message}"));
                         excs.Add(ex);
                     }
                 });
 
                 if (excs.Any())
-                    MessageBox.Show($"Successfully compressed {files.Count - excs.Count} out of {files.Count} files, see log for details. Saved {FileSize.FromBytes(totalSizeSaved).ToString()}.", "Compress files", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(T._($"Successfully compressed {files.Count - excs.Count} out of {files.Count} files, see log for details. Saved {FileSize.FromBytes(totalSizeSaved).ToString()}."), T._("Compress files"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 else
-                    MessageBox.Show($"Successfully compressed {files.Count} files. Saved {FileSize.FromBytes(totalSizeSaved).ToString()}.", "Compress files", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(T._($"Successfully compressed {files.Count} files. Saved {FileSize.FromBytes(totalSizeSaved).ToString()}."), T._("Compress files"), MessageBoxButtons.OK, MessageBoxIcon.Information);
             });
         }
 
